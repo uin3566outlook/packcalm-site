@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://packcalm.uin3566.chatgpt.site';
-const socialImageUrl = new URL('/og.png', siteUrl).toString();
+const socialImageUrl = new URL('/og.jpg', siteUrl).toString();
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
