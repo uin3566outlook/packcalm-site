@@ -76,13 +76,13 @@ export default function Home() {
           <div className="color-orb color-orb-blue" />
           <div className="color-orb color-orb-lilac" />
           <div className="phone phone-back phone-left">
-            <img src="/assets/trips-home.png" alt="PackCalm Trips screen" />
+            <img src="/assets/latest/trips.png" alt="Current PackCalm Trips screen" />
           </div>
           <div className="phone phone-front">
-            <img src="/assets/checklist.png" alt="Packing checklist and progress in PackCalm" />
+            <img src="/assets/latest/packing.png" alt="Current packing checklist and progress in PackCalm" />
           </div>
           <div className="phone phone-back phone-right">
-            <img src="/assets/items-library.png" alt="Personal item library in PackCalm" />
+            <img src="/assets/latest/items.png" alt="Current personal item library in PackCalm" />
           </div>
           <div className="floating-note note-ready"><strong>9 of 14</strong><span>ready to go</span></div>
           <div className="floating-note note-private"><strong>100% local</strong><span>your lists stay yours</span></div>
@@ -175,7 +175,7 @@ export default function Home() {
         </div>
         <div className="story-visual story-visual-items">
           <div className="story-phone">
-            <img src="/assets/items-library.png" alt="PackCalm personal item library" />
+            <img src="/assets/latest/items.png" alt="Current PackCalm personal item library" />
           </div>
           <div className="story-callout callout-search"><span>120+</span> useful item icons</div>
           <div className="story-callout callout-photo"><span>Yours</span> photo icons stay local</div>
@@ -195,7 +195,7 @@ export default function Home() {
         </div>
         <div className="story-visual story-visual-templates">
           <div className="story-phone">
-            <img src="/assets/templates.png" alt="Reusable lists in PackCalm" />
+            <img src="/assets/latest/lists.png" alt="Current reusable lists in PackCalm" />
           </div>
           <div className="template-stack" aria-hidden="true">
             <span><i className="dot dot-blue" /> Business essentials</span>
