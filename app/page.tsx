@@ -68,13 +68,13 @@ export default function Home() {
           <div className="color-orb color-orb-blue" />
           <div className="color-orb color-orb-lilac" />
           <div className="phone phone-back phone-left">
-            <img src="/assets/latest/trips.png" alt="Current PackCalm Trips screen" />
+            <img src="/assets/latest/trips.webp" alt="Current PackCalm Trips screen" />
           </div>
           <div className="phone phone-front">
-            <img src="/assets/latest/packing.png" alt="Current packing checklist and progress in PackCalm" />
+            <img src="/assets/latest/packing.webp" alt="Current packing checklist and progress in PackCalm" />
           </div>
           <div className="phone phone-back phone-right">
-            <img src="/assets/latest/items.png" alt="Current personal item library in PackCalm" />
+            <img src="/assets/latest/items.webp" alt="Current personal item library in PackCalm" />
           </div>
           <div className="floating-note note-ready"><strong>9 of 14</strong><span>ready to go</span></div>
           <div className="floating-note note-private"><strong>100% local</strong><span>your lists stay yours</span></div>
