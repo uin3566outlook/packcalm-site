@@ -127,6 +127,17 @@ nav > a:not(.download-button):hover { opacity: .6; }
 .departure-stamp { bottom: 54px; left: 3%; padding: 12px 15px; border-style: dashed; border-radius: 13px; opacity: .1; transform: rotate(-7deg); }
 .travel-tag { top: 132px; right: 2.5%; padding: 13px 15px; border-radius: 15px; opacity: .085; transform: rotate(8deg); }
 .travel-pin { position: absolute; right: 34%; bottom: 48px; opacity: .065; transform: rotate(-8deg); }
+.packing-checklist { position: absolute; top: 120px; left: 4%; display: grid; width: 170px; gap: 7px; padding: 14px 15px; border: 1px solid currentColor; border-radius: 16px; background: rgba(255,255,255,.34); opacity: .12; transform: rotate(-5deg); }
+.packing-checklist > small { margin-bottom: 2px; font-size: 8px; font-weight: 850; letter-spacing: .2em; }
+.packing-checklist span { display: flex; align-items: center; gap: 7px; padding-top: 6px; border-top: 1px solid currentColor; font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+.packing-checklist svg { color: var(--blue); }
+.packing-item { position: absolute; display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid rgba(114,87,32,.35); border-radius: 18px; background: rgba(255,255,255,.55); box-shadow: 0 10px 30px rgba(102,74,11,.08); opacity: .15; }
+.packing-item img { width: 31px; height: 31px; }
+.packing-passport { top: 178px; left: 29%; transform: rotate(10deg); }
+.packing-laptop { bottom: 24px; left: 29%; transform: rotate(-9deg); }
+.packing-headphones { top: 92px; right: 22%; transform: rotate(7deg); }
+.packing-toothbrush { right: 2.5%; bottom: 24px; transform: rotate(12deg); }
+.packing-jacket { top: 430px; right: 1.5%; transform: rotate(-8deg); }
 .hero-copy { position: relative; z-index: 4; min-width: 0; padding-bottom: 30px; }
 .eyebrow { margin: 0 0 24px; color: #725720; font-size: 12px; font-weight: 820; letter-spacing: .19em; }
 h1 { max-width: 480px; margin: 0; font-size: clamp(52px, 4.4vw, 64px); line-height: .94; letter-spacing: -.075em; font-weight: 850; }
@@ -238,6 +249,11 @@ h1 .hero-accent { color: var(--blue); }
   .departure-stamp { bottom: 90px; left: 6%; }
   .travel-tag { top: 700px; right: 6%; }
   .travel-pin { right: auto; bottom: 120px; left: 9%; }
+  .packing-checklist { top: 590px; left: 5%; }
+  .packing-passport { top: 570px; left: 13%; }
+  .packing-laptop { bottom: 74px; left: 11%; }
+  .packing-headphones { top: 620px; right: 11%; }
+  .packing-jacket { top: 860px; right: 4%; }
 }
 
 @media (max-width: 1040px) {
@@ -266,6 +282,12 @@ h1 .hero-accent { color: var(--blue); }
   .hero-visual { min-height: 490px; transform: scale(.82); transform-origin: top center; }
   .travel-route { top: 575px; width: 86vw; opacity: .15; }
   .departure-stamp, .travel-tag, .travel-pin { display: none; }
+  .packing-checklist, .packing-laptop, .packing-jacket { display: none; }
+  .packing-item { width: 48px; height: 48px; border-radius: 15px; opacity: .12; }
+  .packing-item img { width: 26px; height: 26px; }
+  .packing-passport { top: 540px; left: -8px; }
+  .packing-headphones { top: 665px; right: -8px; }
+  .packing-toothbrush { right: 18px; bottom: 18px; }
   .phone-front { width: 245px; height: 533px; }
   .phone-back { top: 76px; width: 195px; height: 424px; }
   .phone-left { left: -74px; }

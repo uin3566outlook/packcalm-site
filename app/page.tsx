@@ -64,6 +64,19 @@ export default function Home() {
             <span><small>PACKED</small><strong>READY TO GO</strong></span>
           </div>
           <MapPin className="travel-pin" size={72} strokeWidth={1.1} />
+          <div className="packing-checklist">
+            <small>PACKING LIST</small>
+            <span><Check size={12} /> Passport</span>
+            <span><Check size={12} /> Charger</span>
+            <span><Check size={12} /> Headphones</span>
+          </div>
+          <div className="packing-items">
+            {['passport', 'laptop', 'headphones', 'toothbrush', 'jacket'].map((item) => (
+              <span className={`packing-item packing-${item}`} key={item}>
+                <img src={`/assets/items/${item}.svg`} alt="" />
+              </span>
+            ))}
+          </div>
         </div>
         <div className="hero-copy">
           <p className="eyebrow">A CALMER WAY TO PACK</p>
