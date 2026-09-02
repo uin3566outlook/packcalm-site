@@ -45,6 +45,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" as="image" href="/assets/latest/packing.webp" type="image/webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/assets/latest/trips.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/assets/latest/items.webp" type="image/webp" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
