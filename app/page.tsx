@@ -10,7 +10,6 @@ import {
   Smartphone,
   Sparkles,
 } from 'lucide-react';
-import { PackingDemo } from './packing-demo';
 
 const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL || '#download';
 
@@ -61,8 +60,8 @@ export default function Home() {
             <span>Start packing.</span>
           </h1>
           <p className="hero-description">
-            PackCalm turns the things you already bring into reusable lists—then
-            lets you check or drag every item straight into your suitcase.
+            PackCalm turns the things you already bring into reusable lists—so
+            every trip starts organized and nothing important gets left behind.
           </p>
           <div className="hero-actions">
             <DownloadButton />
@@ -80,7 +79,7 @@ export default function Home() {
             <img src="/assets/trips-home.png" alt="PackCalm Trips screen" />
           </div>
           <div className="phone phone-front">
-            <img src="/assets/packing.png" alt="Packing progress and interactive suitcase in PackCalm" />
+            <img src="/assets/checklist.png" alt="Packing checklist and progress in PackCalm" />
           </div>
           <div className="phone phone-back phone-right">
             <img src="/assets/items-library.png" alt="Personal item library in PackCalm" />
@@ -119,18 +118,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="demo-section" id="how-it-works">
-        <div className="section-shell">
-          <div className="section-heading centered-heading">
-            <p className="eyebrow">TRY THE FEELING</p>
-            <h2>Packing should feel this satisfying.</h2>
-            <p>Tap the items below. Your checklist and suitcase always stay in sync.</p>
-          </div>
-          <PackingDemo />
-        </div>
-      </section>
-
-      <section className="steps-section section-shell">
+      <section className="steps-section section-shell" id="how-it-works">
         <div className="section-heading steps-title">
           <p className="eyebrow">YOUR SYSTEM, READY TO REUSE</p>
           <h2>Less setup with every trip.</h2>
@@ -164,7 +152,7 @@ export default function Home() {
             <span className="step-icon"><CheckCircle2 size={23} /></span>
             <span className="step-number">03</span>
             <h3>Pack with confidence</h3>
-            <p>Check an item or drag it into the suitcase. Watch the unfinished list disappear.</p>
+            <p>Check things off as they go into your bag and see exactly what is still waiting.</p>
             <div className="progress-card" aria-hidden="true">
               <div><strong>Ready</strong><strong>100%</strong></div>
               <span><i /></span>

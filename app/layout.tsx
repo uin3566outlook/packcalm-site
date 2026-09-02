@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: 'PackCalm — Stop remembering. Start packing.',
-  description: 'Reusable packing lists, a visual suitcase, and calm departures. PackCalm is free for iPhone and keeps your travel data on your device.',
+  description: 'Reusable packing lists, clear progress, and calmer departures. PackCalm is free for iPhone and keeps your travel data on your device.',
   applicationName: 'PackCalm',
   icons: {
     icon: '/assets/app-icon.png',
