@@ -13,62 +13,98 @@ import {
   Sparkles,
   Ticket,
 } from 'lucide-react';
+import type { Metadata } from 'next';
+import { headers } from 'next/headers';
+import { languageLabels, resolveLanguage, supportedLanguages, translations, type Language } from './translations';
 
 const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL || '#download';
+const legalBaseUrl = 'https://uin3566outlook.github.io/bringcue-legal';
+type PageProps = { searchParams?: Promise<{ lang?: string | string[] }> };
 
-const trustNotes = ['Free to download', 'No account', 'No ads'];
+async function pageLanguage(searchParams?: PageProps['searchParams']) {
+  const params = searchParams ? await searchParams : {};
+  const requestedLanguage = Array.isArray(params.lang) ? params.lang[0] : params.lang;
+  const requestHeaders = await headers();
+  return resolveLanguage(requestedLanguage, requestHeaders.get('accept-language') || '');
+}
 
-function DownloadButton({ compact = false }: { compact?: boolean }) {
+export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
+  const language = await pageLanguage(searchParams);
+  const t = translations[language];
+  return {
+    title: `PackCalm — ${t.heroLine} ${t.heroAccent}`,
+    description: t.description,
+    alternates: {
+      canonical: `/?lang=${language}`,
+      languages: { en: '/?lang=en', 'zh-Hans': '/?lang=zh-Hans', 'zh-Hant': '/?lang=zh-Hant' },
+    },
+  };
+}
+
+function legalUrl(document: 'privacy-policy' | 'terms-of-use' | 'support', language: Language) {
+  return `${legalBaseUrl}/${document}.html?lang=${encodeURIComponent(language)}&locked=1#${encodeURIComponent(language)}`;
+}
+
+function DownloadButton({ copy, compact = false }: { copy: (typeof translations)[Language]; compact?: boolean }) {
   return (
     <a className={`download-button${compact ? ' download-button-compact' : ''}`} href={appStoreUrl}>
       <Smartphone aria-hidden="true" size={compact ? 18 : 22} strokeWidth={2.2} />
       <span>
-        <small>Download for</small>
-        iPhone
+        <small>{copy.downloadFor}</small>
+        {copy.device}
       </span>
       {!compact && <ArrowRight aria-hidden="true" className="download-arrow" size={19} />}
     </a>
   );
 }
 
-export default function Home() {
+export default async function Home({ searchParams }: PageProps) {
+  const language = await pageLanguage(searchParams);
+  const t = translations[language];
+
   return (
     <main>
+      <script dangerouslySetInnerHTML={{ __html: `document.documentElement.lang=${JSON.stringify(language)}` }} />
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="PackCalm home">
+        <a className="brand" href="#top" aria-label={t.homeLabel}>
           <img src="/assets/app-icon.png" alt="" />
           <span>PackCalm</span>
         </a>
-        <nav aria-label="Primary navigation">
-          <a href="#how-it-works">How it works</a>
-          <a href="#privacy">Privacy</a>
-          <DownloadButton compact />
+        <nav aria-label={t.navigation}>
+          <a href="#how-it-works">{t.navHow}</a>
+          <a href="#privacy">{t.navPrivacy}</a>
+          <div className="language-switcher" aria-label={t.language}>
+            {supportedLanguages.map((option) => (
+              <a href={`/?lang=${option}`} hrefLang={option} aria-current={option === language ? 'page' : undefined} key={option}>{languageLabels[option]}</a>
+            ))}
+          </div>
+          <DownloadButton copy={t} compact />
         </nav>
       </header>
 
       <section className="hero" id="top">
         <div className="travel-atmosphere" aria-hidden="true">
           <div className="travel-route">
-            <span>HOME</span>
+            <span>{t.home}</span>
             <i />
             <PlaneTakeoff size={18} strokeWidth={1.8} />
             <i />
-            <span>NEXT TRIP</span>
+            <span>{t.nextTrip}</span>
           </div>
           <div className="departure-stamp">
             <Ticket size={27} strokeWidth={1.6} />
-            <span><small>DEPARTURE</small><strong>GATE 12 · 07:45</strong></span>
+            <span><small>{t.departure}</small><strong>{t.gate}</strong></span>
           </div>
           <div className="travel-tag">
             <Luggage size={32} strokeWidth={1.5} />
-            <span><small>PACKED</small><strong>READY TO GO</strong></span>
+            <span><small>{t.packed}</small><strong>{t.readyToGo}</strong></span>
           </div>
           <MapPin className="travel-pin" size={72} strokeWidth={1.1} />
           <div className="packing-checklist">
-            <small>PACKING LIST</small>
-            <span><Check size={12} /> Passport</span>
-            <span><Check size={12} /> Charger</span>
-            <span><Check size={12} /> Headphones</span>
+            <small>{t.packingList}</small>
+            <span><Check size={12} /> {t.passport}</span>
+            <span><Check size={12} /> {t.charger}</span>
+            <span><Check size={12} /> {t.headphones}</span>
           </div>
           <div className="packing-items">
             {['passport', 'laptop', 'headphones', 'toothbrush', 'jacket'].map((item) => (
@@ -79,52 +115,49 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-copy">
-          <p className="eyebrow">A CALMER WAY TO PACK</p>
+          <p className="eyebrow">{t.eyebrow}</p>
           <h1>
-            <span className="hero-line">Stop remembering.</span>
-            <span className="hero-accent">Start packing.</span>
+            <span className="hero-line">{t.heroLine}</span>
+            <span className="hero-accent">{t.heroAccent}</span>
           </h1>
-          <p className="hero-description">
-            PackCalm turns the things you already bring into reusable lists—so
-            every trip starts organized and nothing important gets left behind.
-          </p>
+          <p className="hero-description">{t.description}</p>
           <div className="hero-actions">
-            <DownloadButton />
-            <a className="text-link" href="#how-it-works">See how it works <span>↓</span></a>
+            <DownloadButton copy={t} />
+            <a className="text-link" href="#how-it-works">{t.seeHow} <span>↓</span></a>
           </div>
-          <ul className="trust-list" aria-label="Product highlights">
-            {trustNotes.map((note) => <li key={note}>{note}</li>)}
+          <ul className="trust-list" aria-label={t.highlights}>
+            {t.trust.map((note) => <li key={note}>{note}</li>)}
           </ul>
         </div>
 
-        <div className="hero-visual" aria-label="PackCalm app preview">
+        <div className="hero-visual" aria-label={t.preview}>
           <div className="color-orb color-orb-blue" />
           <div className="color-orb color-orb-lilac" />
           <div className="phone phone-back phone-left">
-            <img src="/assets/latest/trips.webp" alt="Current PackCalm Trips screen" loading="eager" decoding="sync" />
+            <img src="/assets/latest/trips.webp" alt={t.tripsAlt} loading="eager" decoding="sync" />
           </div>
           <div className="phone phone-front">
-            <img src="/assets/latest/packing.webp" alt="Current packing checklist and progress in PackCalm" loading="eager" decoding="sync" fetchPriority="high" />
+            <img src="/assets/latest/packing.webp" alt={t.packingAlt} loading="eager" decoding="sync" fetchPriority="high" />
           </div>
           <div className="phone phone-back phone-right">
-            <img src="/assets/latest/items.webp" alt="Current personal item library in PackCalm" loading="eager" decoding="sync" />
+            <img src="/assets/latest/items.webp" alt={t.itemsAlt} loading="eager" decoding="sync" />
           </div>
-          <div className="floating-note note-ready"><strong>9 of 14</strong><span>ready to go</span></div>
-          <div className="floating-note note-private"><strong>100% local</strong><span>your lists stay yours</span></div>
+          <div className="floating-note note-ready"><strong>{t.readyCount}</strong><span>{t.readyCaption}</span></div>
+          <div className="floating-note note-private"><strong>{t.localTitle}</strong><span>{t.localCaption}</span></div>
         </div>
       </section>
 
       <section className="steps-section section-shell" id="how-it-works">
         <div className="section-heading steps-title">
-          <p className="eyebrow">HOW IT WORKS</p>
-          <h2>Build once. Pack faster every time.</h2>
+          <p className="eyebrow">{t.howEyebrow}</p>
+          <h2>{t.howTitle}</h2>
         </div>
         <div className="steps-grid">
           <article className="step-card step-card-blue">
             <span className="step-icon"><LibraryBig size={23} /></span>
             <span className="step-number">01</span>
-            <h3>Save it once</h3>
-            <p>Build a personal catalog of what you actually bring—from your passport to your lucky socks.</p>
+            <h3>{t.saveTitle}</h3>
+            <p>{t.saveDescription}</p>
             <div className="mini-shelf" aria-hidden="true">
               {['passport', 'phone', 'laptop', 'headphones'].map((item, index) => (
                 <span className={`color-${['mint', 'blue', 'lilac', 'ink'][index]}`} key={item}>
@@ -136,23 +169,23 @@ export default function Home() {
           <article className="step-card step-card-mint">
             <span className="step-icon"><Repeat2 size={23} /></span>
             <span className="step-number">02</span>
-            <h3>Reuse what works</h3>
-            <p>Start from My Core List, a ready-made pack, or a past trip. Adjust only what changed.</p>
+            <h3>{t.reuseTitle}</h3>
+            <p>{t.reuseDescription}</p>
             <div className="reuse-list" aria-hidden="true">
-              <span><Heart size={16} fill="currentColor" /> My Core List <Check size={16} /></span>
-              <span><Sparkles size={16} /> Business Trip <Check size={16} /></span>
-              <span><PlaneTakeoff size={16} /> Beach Weekend <Check size={16} /></span>
+              <span><Heart size={16} fill="currentColor" /> {t.coreList} <Check size={16} /></span>
+              <span><Sparkles size={16} /> {t.businessTrip} <Check size={16} /></span>
+              <span><PlaneTakeoff size={16} /> {t.beachWeekend} <Check size={16} /></span>
             </div>
           </article>
           <article className="step-card step-card-yellow">
             <span className="step-icon"><CheckCircle2 size={23} /></span>
             <span className="step-number">03</span>
-            <h3>Pack with confidence</h3>
-            <p>Check things off as they go into your bag and see exactly what is still waiting.</p>
+            <h3>{t.confidenceTitle}</h3>
+            <p>{t.confidenceDescription}</p>
             <div className="progress-card" aria-hidden="true">
-              <div><strong>Ready</strong><strong>100%</strong></div>
+              <div><strong>{t.ready}</strong><strong>100%</strong></div>
               <span><i /></span>
-              <small>Nothing left to pack</small>
+              <small>{t.nothingLeft}</small>
             </div>
           </article>
         </div>
@@ -161,21 +194,21 @@ export default function Home() {
       <section className="essentials-section" id="privacy">
         <div className="section-shell essentials-shell">
           <div className="essentials-heading">
-            <p className="eyebrow">SIMPLE ON PURPOSE</p>
-            <h2>Everything you need.<br />Nothing in the way.</h2>
+            <p className="eyebrow">{t.simpleEyebrow}</p>
+            <h2>{t.essentialsTitle[0]}<br />{t.essentialsTitle[1]}</h2>
           </div>
           <div className="essentials-grid">
             <article>
               <span className="essentials-icon essentials-icon-mint"><ShieldCheck size={26} /></span>
-              <h3>Private by default</h3>
-              <p>Your trips, notes, lists, and custom photo icons stay on your iPhone. No account, ads, or behavioral tracking.</p>
-              <span className="essentials-proof"><Check size={16} /> Core packing works offline</span>
+              <h3>{t.privateTitle}</h3>
+              <p>{t.privateDescription}</p>
+              <span className="essentials-proof"><Check size={16} /> {t.privateProof}</span>
             </article>
             <article>
               <span className="essentials-icon essentials-icon-yellow"><Sparkles size={26} /></span>
-              <h3>Free for real trips</h3>
-              <p>The complete core packing flow is free. PackCalm Pro is an optional one-time unlock, never another subscription.</p>
-              <span className="essentials-proof"><Check size={16} /> Unlimited personal items</span>
+              <h3>{t.freeTitle}</h3>
+              <p>{t.freeDescription}</p>
+              <span className="essentials-proof"><Check size={16} /> {t.freeProof}</span>
             </article>
           </div>
         </div>
@@ -186,28 +219,28 @@ export default function Home() {
           <div className="download-glow glow-one" />
           <div className="download-glow glow-two" />
           <img className="download-icon" src="/assets/app-icon.png" alt="PackCalm app icon" />
-          <p className="eyebrow">YOUR NEXT TRIP STARTS CALMER</p>
-          <h2>Pack the bag.<br />Leave the worry.</h2>
-          <p>Free to download. No account required.</p>
-          <DownloadButton />
+          <p className="eyebrow">{t.downloadEyebrow}</p>
+          <h2>{t.downloadTitle[0]}<br />{t.downloadTitle[1]}</h2>
+          <p>{t.downloadDescription}</p>
+          <DownloadButton copy={t} />
           {!process.env.NEXT_PUBLIC_APP_STORE_URL && (
-            <small className="launch-note">App Store link will activate at launch.</small>
+            <small className="launch-note">{t.launchNote}</small>
           )}
         </div>
       </section>
 
       <footer className="site-footer section-shell">
-        <a className="brand" href="#top" aria-label="Back to the top">
+        <a className="brand" href="#top" aria-label={t.topLabel}>
           <img src="/assets/app-icon.png" alt="" />
           <span>PackCalm</span>
         </a>
-        <p>Remember what to bring, without starting from scratch.</p>
+        <p>{t.footerTagline}</p>
         <div className="footer-links">
-          <a href="https://uin3566outlook.github.io/bringcue-legal/privacy-policy.html">Privacy</a>
-          <a href="https://uin3566outlook.github.io/bringcue-legal/terms-of-use.html">Terms</a>
-          <a href="https://uin3566outlook.github.io/bringcue-legal/support.html">Support</a>
+          <a href={legalUrl('privacy-policy', language)}>{t.privacy}</a>
+          <a href={legalUrl('terms-of-use', language)}>{t.terms}</a>
+          <a href={legalUrl('support', language)}>{t.support}</a>
         </div>
-        <p className="copyright">© 2026 PackCalm. Apple and iPhone are trademarks of Apple Inc.</p>
+        <p className="copyright">{t.copyright}</p>
       </footer>
     </main>
   );
