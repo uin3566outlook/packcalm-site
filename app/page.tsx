@@ -4,11 +4,14 @@ import {
   CheckCircle2,
   Heart,
   LibraryBig,
+  Luggage,
+  MapPin,
   PlaneTakeoff,
   Repeat2,
   ShieldCheck,
   Smartphone,
   Sparkles,
+  Ticket,
 } from 'lucide-react';
 
 const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL || '#download';
@@ -44,6 +47,24 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
+        <div className="travel-atmosphere" aria-hidden="true">
+          <div className="travel-route">
+            <span>HOME</span>
+            <i />
+            <PlaneTakeoff size={18} strokeWidth={1.8} />
+            <i />
+            <span>NEXT TRIP</span>
+          </div>
+          <div className="departure-stamp">
+            <Ticket size={27} strokeWidth={1.6} />
+            <span><small>DEPARTURE</small><strong>GATE 12 · 07:45</strong></span>
+          </div>
+          <div className="travel-tag">
+            <Luggage size={32} strokeWidth={1.5} />
+            <span><small>PACKED</small><strong>READY TO GO</strong></span>
+          </div>
+          <MapPin className="travel-pin" size={72} strokeWidth={1.1} />
+        </div>
         <div className="hero-copy">
           <p className="eyebrow">A CALMER WAY TO PACK</p>
           <h1>
