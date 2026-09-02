@@ -145,6 +145,10 @@ h1 .hero-accent { color: var(--blue); }
 .note-ready { top: 68px; right: -5px; }
 .note-private { bottom: 44px; left: -16px; }
 
+@media (min-width: 1041px) {
+  .phone-left { left: 52px; }
+}
+
 .section-heading h2, .essentials-heading h2, .download-card h2 { margin: 0; font-size: clamp(42px, 5vw, 68px); font-weight: 820; line-height: .98; letter-spacing: -.06em; }
 
 .mini-shelf .color-mint { background: var(--mint); }
