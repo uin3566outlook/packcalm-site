@@ -47,9 +47,8 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">A CALMER WAY TO PACK</p>
           <h1>
-            Stop remembering.
-            <br />
-            <span>Start packing.</span>
+            <span className="hero-line">Stop remembering.</span>
+            <span className="hero-accent">Start packing.</span>
           </h1>
           <p className="hero-description">
             PackCalm turns the things you already bring into reusable lists—so
