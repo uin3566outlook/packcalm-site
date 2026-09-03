@@ -18,7 +18,7 @@ import { headers } from 'next/headers';
 import { languageLabels, resolveLanguage, supportedLanguages, translations, type Language } from './translations';
 
 const appStoreUrl = process.env.NEXT_PUBLIC_APP_STORE_URL || '#download';
-const legalBaseUrl = 'https://uin3566outlook.github.io/bringcue-legal';
+const legalBaseUrl = '/legal';
 type PageProps = { searchParams?: Promise<{ lang?: string | string[] }> };
 
 async function pageLanguage(searchParams?: PageProps['searchParams']) {
