@@ -17,17 +17,17 @@
   const chromeCopy = {
     en: {
       privacy: "Privacy", terms: "Terms", support: "Support", privacyPolicy: "Privacy Policy", termsOfUse: "Terms of Use",
-      skip: "Skip to content", language: "Language", navigation: "Site navigation", copyright: "Copyright 2026 yehuanwei", error: "This page could not be loaded. Please try again later or update PackCalm.",
+      skip: "Skip to content", language: "Language", navigation: "Site navigation", copyright: "Copyright 2026 Huanwei Ye", error: "This page could not be loaded. Please try again later or update PackCalm.",
       titles: { "privacy-policy": "PackCalm Privacy Policy", "terms-of-use": "PackCalm Terms of Use", support: "PackCalm Support" },
     },
     "zh-Hans": {
       privacy: "隐私", terms: "条款", support: "支持", privacyPolicy: "隐私政策", termsOfUse: "使用条款",
-      skip: "跳到正文", language: "语言", navigation: "站点导航", copyright: "版权所有 2026 yehuanwei", error: "页面暂时无法加载，请稍后重试或更新 PackCalm。",
+      skip: "跳到正文", language: "语言", navigation: "站点导航", copyright: "版权所有 2026 Huanwei Ye", error: "页面暂时无法加载，请稍后重试或更新 PackCalm。",
       titles: { "privacy-policy": "PackCalm 隐私政策", "terms-of-use": "PackCalm 使用条款", support: "PackCalm 支持" },
     },
     "zh-Hant": {
       privacy: "隱私", terms: "條款", support: "支援", privacyPolicy: "隱私權政策", termsOfUse: "使用條款",
-      skip: "跳到正文", language: "語言", navigation: "網站導覽", copyright: "版權所有 2026 yehuanwei", error: "頁面暫時無法載入，請稍後重試或更新 PackCalm。",
+      skip: "跳到正文", language: "語言", navigation: "網站導覽", copyright: "版權所有 2026 Huanwei Ye", error: "頁面暫時無法載入，請稍後重試或更新 PackCalm。",
       titles: { "privacy-policy": "PackCalm 隱私權政策", "terms-of-use": "PackCalm 使用條款", support: "PackCalm 支援" },
     },
   };

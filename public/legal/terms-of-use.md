@@ -7,7 +7,7 @@ title: PackCalm Terms of Use
 
 Effective: September 1, 2026
 
-Application provider: yehuanwei
+Application provider: Huanwei Ye
 
 These Terms govern your use of PackCalm. [Apple's Standard End User License Agreement (Standard EULA)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) also applies to the app and is incorporated here. If these Terms conflict with the Standard EULA or mandatory law, the Standard EULA or mandatory law controls to the extent of the conflict.
 
@@ -57,7 +57,7 @@ These Terms may be updated for legal, security, or product changes. The effectiv
 
 生效日期：2026 年 9 月 1 日
 
-App 提供方：yehuanwei
+App 提供方：Huanwei Ye
 
 本条款适用于你对 PackCalm 的使用。Apple 的[《标准最终用户许可协议》（标准 EULA）](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/)同样适用于本 App，并通过引用纳入本条款。如本条款与标准 EULA 或强制性法律冲突，应在冲突范围内以标准 EULA 或强制性法律为准。
 
@@ -107,7 +107,7 @@ PackCalm 可能被更新、变更、暂停或停止提供。在法律允许的�
 
 生效日期：2026 年 9 月 1 日
 
-App 提供方：yehuanwei
+App 提供方：Huanwei Ye
 
 本條款適用於你對 PackCalm 的使用。Apple 的[《標準最終使用者授權協議》（標準 EULA）](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/)同樣適用於本 App，並透過引用納入本條款。如本條款與標準 EULA 或強制性法律衝突，應在衝突範圍內以標準 EULA 或強制性法律為準。
 

@@ -5,7 +5,7 @@ title: PackCalm Support
 
 # PackCalm Support
 
-Support provider: yehuanwei
+Support provider: Huanwei Ye
 
 For help with PackCalm, contact us by email. This page has no contact form and does not collect submissions.
 
@@ -27,7 +27,7 @@ PackCalm is local-first. You can export, import, or clear local data from **Sett
 
 # PackCalm 支持（简体中文）
 
-支持提供方：yehuanwei
+支持提供方：Huanwei Ye
 
 如需 PackCalm 使用帮助，请通过电子邮件联系我们。本页面不提供联系表单，也不会收集提交内容。
 
@@ -49,7 +49,7 @@ PackCalm 以本机存储为主。你可以在“设置 > 本地数据”中导�
 
 # PackCalm 支援（繁體中文）
 
-支援提供方：yehuanwei
+支援提供方：Huanwei Ye
 
 如需 PackCalm 使用協助，請透過電子郵件聯絡我們。本頁面不提供聯絡表單，也不會收集提交內容。
 

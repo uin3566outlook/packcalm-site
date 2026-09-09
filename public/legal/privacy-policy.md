@@ -7,7 +7,7 @@ title: PackCalm Privacy Policy
 
 Effective: September 3, 2026
 
-Application provider: yehuanwei
+Application provider: Huanwei Ye
 
 PackCalm is a local-first packing checklist app. This policy explains what information the app handles, where it is stored, when another service may receive it, and how you can delete it.
 
@@ -65,7 +65,7 @@ For privacy questions or support requests, email [airproductlab@gmail.com](mailt
 
 生效日期：2026 年 9 月 3 日
 
-App 提供方：yehuanwei
+App 提供方：Huanwei Ye
 
 PackCalm 是一款以本机存储为主的行李清单 App。本政策说明 App 会处理哪些信息、信息存储在哪里、何时可能由其他服务接收，以及你可以如何删除这些信息。
 
@@ -123,7 +123,7 @@ PackCalm 是面向普通用户的工具，并非为收集儿童个人信息而�
 
 生效日期：2026 年 9 月 3 日
 
-App 提供方：yehuanwei
+App 提供方：Huanwei Ye
 
 PackCalm 是一款以本機儲存為主的行李清單 App。本政策說明 App 會處理哪些資訊、資訊儲存在哪裡、何時可能由其他服務接收，以及你可以如何刪除這些資訊。
 
