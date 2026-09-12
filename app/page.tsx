@@ -134,13 +134,13 @@ export default async function Home({ searchParams }: PageProps) {
           <div className="color-orb color-orb-blue" />
           <div className="color-orb color-orb-lilac" />
           <div className="phone phone-back phone-left">
-            <img src="/assets/latest/trips.webp" alt={t.tripsAlt} loading="eager" decoding="sync" />
+            <img src={`/assets/latest/${language}/trips.webp`} alt={t.tripsAlt} loading="eager" decoding="sync" />
           </div>
           <div className="phone phone-front">
-            <img src="/assets/latest/packing.webp" alt={t.packingAlt} loading="eager" decoding="sync" fetchPriority="high" />
+            <img src={`/assets/latest/${language}/packing.webp`} alt={t.packingAlt} loading="eager" decoding="sync" fetchPriority="high" />
           </div>
           <div className="phone phone-back phone-right">
-            <img src="/assets/latest/items.webp" alt={t.itemsAlt} loading="eager" decoding="sync" />
+            <img src={`/assets/latest/${language}/items.webp`} alt={t.itemsAlt} loading="eager" decoding="sync" />
           </div>
           <div className="floating-note note-ready"><strong>{t.readyCount}</strong><span>{t.readyCaption}</span></div>
           <div className="floating-note note-private"><strong>{t.localTitle}</strong><span>{t.localCaption}</span></div>
