@@ -1,15 +1,17 @@
 {
-  "name": "sites-project",
+  "name": "packcalm-site",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build",
-    "start": "wrangler dev --config dist/server/wrangler.json",
-    "lint": "oxlint",
+    "dev": "vite --config vite.github.config.ts",
+    "build": "vite build --config vite.github.config.ts",
+    "preview": "vite preview --config vite.github.config.ts",
+    "build:sites": "vinext build",
+    "start:sites": "wrangler dev --config dist/server/wrangler.json",
+    "lint": "oxlint app/page.tsx app/translations.ts src vite.github.config.ts",
     "format": "oxfmt"
   },
   "dependencies": {
