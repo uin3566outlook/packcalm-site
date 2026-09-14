@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+      body {
+        color: #11141d;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 84% 5%, rgba(255,255,255,.92), transparent 28%),
+          radial-gradient(circle at 6% 92%, rgba(7,102,245,.15), transparent 30%),
+          linear-gradient(135deg, #fffdf6 0%, #fff3c9 52%, #f8cf69 100%);
+      }
+
+      .stage { position: relative; width: 1200px; height: 630px; overflow: hidden; }
+      .grain {
+        position: absolute;
+        inset: 0;
+        opacity: .035;
+        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.58'/%3E%3C/svg%3E");
+      }
+      .route {
+        position: absolute;
+        left: 46px;
+        right: 46px;
+        bottom: 30px;
+        height: 1px;
+        opacity: .22;
+        background: linear-gradient(90deg, #0766f5 0 8%, transparent 8% 10%, #805400 10% 42%, transparent 42% 45%, #805400 45% 100%);
+      }
+
+      .copy { position: absolute; z-index: 5; top: 50px; left: 64px; width: 625px; }
+      .brand { display: flex; align-items: center; gap: 15px; font-size: 25px; font-weight: 820; letter-spacing: -.7px; }
+      .brand img { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 12px 30px rgba(83,55,0,.16); }
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        height: 36px;
+        margin-top: 54px;
+        padding: 0 15px;
+        border-radius: 999px;
+        color: #0648b4;
+        background: rgba(255,255,255,.72);
+        border: 1px solid rgba(7,102,245,.13);
+        font-size: 14px;
+        font-weight: 820;
+        letter-spacing: 1.4px;
+      }
+      h1 { margin: 22px 0 0; font-size: 68px; font-weight: 900; line-height: .98; letter-spacing: -4.2px; }
+      h1 span { color: #0766f5; }
+      .description { margin: 23px 0 0; width: 500px; color: rgba(17,20,29,.66); font-size: 22px; font-weight: 590; line-height: 1.38; letter-spacing: -.4px; }
+      .proofs { display: flex; gap: 12px; margin-top: 28px; }
+      .proofs span { padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.66); font-size: 14px; font-weight: 740; box-shadow: 0 8px 24px rgba(96,62,0,.06); }
+
+      .visual { position: absolute; z-index: 4; top: 22px; right: 42px; width: 455px; height: 690px; }
+      .halo { position: absolute; top: 40px; left: 12px; width: 420px; height: 420px; border-radius: 50%; background: rgba(255,255,255,.72); box-shadow: 0 0 0 46px rgba(255,255,255,.18), 0 32px 80px rgba(111,73,0,.13); }
+      .phone {
+        position: absolute;
+        top: 10px;
+        left: 64px;
+        width: 350px;
+        height: 760px;
+        overflow: hidden;
+        border: 9px solid #11141d;
+        border-radius: 48px;
+        background: #fff8e8;
+        box-shadow: 0 38px 80px rgba(57,39,3,.29);
+        transform: rotate(4deg);
+      }
+      .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+      .status-chip {
+        position: absolute;
+        z-index: 7;
+        top: 240px;
+        left: -15px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 48px;
+        padding: 0 17px;
+        border: 1px solid rgba(255,255,255,.82);
+        border-radius: 15px;
+        background: rgba(255,255,255,.92);
+        box-shadow: 0 17px 42px rgba(44,31,5,.17);
+        font-size: 15px;
+        font-weight: 800;
+        transform: rotate(-4deg);
+      }
+      .status-chip i { width: 10px; height: 10px; border-radius: 50%; background: #f2c248; box-shadow: 0 0 0 4px rgba(242,194,72,.19); }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="copy">
+        <div class="brand"><img id="icon" alt="" />PackCalm</div>
+        <div class="kicker">TRAVEL PACKING, WITHOUT THE STRESS</div>
+        <h1>See what's left.<br /><span>Pack with confidence.</span></h1>
+        <p class="description">Reusable packing lists that keep every trip organized—and every essential accounted for.</p>
+        <div class="proofs"><span>✓ Reusable lists</span><span>✓ Works offline</span><span>✓ No account</span></div>
+      </div>
+      <div class="visual">
+        <div class="halo"></div>
+        <div class="phone"><img id="screenshot" alt="" /></div>
+        <div class="status-chip"><i></i>5 items left</div>
+      </div>
+      <div class="route"></div>
+      <div class="grain"></div>
+    </main>
+    <script>
+      window.setAssets = (assets) => {
+        document.getElementById('icon').src = assets.icon;
+        document.getElementById('screenshot').src = assets.screenshot;
+      };
+    </script>
+  </body>
+</html>
