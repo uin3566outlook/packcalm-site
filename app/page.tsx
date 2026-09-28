@@ -24,7 +24,13 @@ import {
 } from './translations';
 
 const baseUrl = import.meta.env.BASE_URL;
-const appStoreUrl = import.meta.env.VITE_APP_STORE_URL || '#download';
+const appStoreLanguages: Record<Language, string> = {
+  en: 'en-US',
+  'zh-Hans': 'zh-Hans-CN',
+  'zh-Hant': 'zh-Hant-TW',
+};
+const appStoreUrl = (language: Language) =>
+  `https://apps.apple.com/app/id6809829261?l=${appStoreLanguages[language]}`;
 const assetUrl = (path: string) => `${baseUrl}${path.replace(/^\/+/, '')}`;
 
 function legalUrl(
@@ -36,15 +42,18 @@ function legalUrl(
 
 function DownloadButton({
   copy,
+  language,
   compact = false,
 }: {
   copy: (typeof translations)[Language];
+  language: Language;
   compact?: boolean;
 }) {
   return (
     <a
       className={`download-button${compact ? ' download-button-compact' : ''}`}
-      href={appStoreUrl}
+      href={appStoreUrl(language)}
+      aria-label={copy.appStoreLabel}
     >
       <Smartphone
         aria-hidden="true"
@@ -98,7 +107,7 @@ export default function Home() {
               </a>
             ))}
           </div>
-          <DownloadButton copy={t} compact />
+          <DownloadButton copy={t} language={language} compact />
         </nav>
       </header>
 
@@ -156,7 +165,7 @@ export default function Home() {
           </h1>
           <p className="hero-description">{t.description}</p>
           <div className="hero-actions">
-            <DownloadButton copy={t} />
+            <DownloadButton copy={t} language={language} />
             <a className="text-link" href="#how-it-works">
               {t.seeHow} <span>↓</span>
             </a>
@@ -325,10 +334,7 @@ export default function Home() {
             {t.downloadTitle[1]}
           </h2>
           <p>{t.downloadDescription}</p>
-          <DownloadButton copy={t} />
-          {!import.meta.env.VITE_APP_STORE_URL && (
-            <small className="launch-note">{t.launchNote}</small>
-          )}
+          <DownloadButton copy={t} language={language} />
         </div>
       </section>
 

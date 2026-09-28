@@ -903,13 +903,6 @@ h1 .hero-accent {
 .download-card .download-button {
   position: relative;
 }
-.launch-note {
-  position: relative;
-  margin-top: 15px;
-  color: rgba(42, 33, 13, 0.58);
-  font-size: 10px;
-}
-
 .site-footer {
   display: grid;
   grid-template-columns: auto 1fr auto;
