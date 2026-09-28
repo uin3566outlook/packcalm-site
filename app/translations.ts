@@ -8,11 +8,8 @@ export const languageLabels: Record<Language, string> = {
   'zh-Hant': '繁',
 };
 
-export function resolveLanguage(requested?: string, acceptLanguage = ''): Language {
+export function resolveLanguage(requested?: string): Language {
   if (supportedLanguages.includes(requested as Language)) return requested as Language;
-  const normalized = acceptLanguage.toLowerCase();
-  if (normalized.includes('zh-hant') || normalized.includes('zh-tw') || normalized.includes('zh-hk')) return 'zh-Hant';
-  if (normalized.includes('zh')) return 'zh-Hans';
   return 'en';
 }
 

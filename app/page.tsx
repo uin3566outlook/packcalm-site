@@ -38,7 +38,7 @@ const subscribeLanguage = () => () => {};
 const getBrowserLanguage = (): Language => {
   const requestedLanguage =
     new URLSearchParams(window.location.search).get('lang') || undefined;
-  return resolveLanguage(requestedLanguage, navigator.language);
+  return resolveLanguage(requestedLanguage);
 };
 const getServerLanguage = (): Language => 'en';
 
