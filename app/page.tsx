@@ -1,5 +1,7 @@
+'use client';
+
 /* oxlint-disable next/no-img-element */
-import { useEffect } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import {
   ArrowRight,
   Check,
@@ -32,6 +34,13 @@ const appStoreLanguages: Record<Language, string> = {
 const appStoreUrl = (language: Language) =>
   `https://apps.apple.com/app/id6809829261?l=${appStoreLanguages[language]}`;
 const assetUrl = (path: string) => `${baseUrl}${path.replace(/^\/+/, '')}`;
+const subscribeLanguage = () => () => {};
+const getBrowserLanguage = (): Language => {
+  const requestedLanguage =
+    new URLSearchParams(window.location.search).get('lang') || undefined;
+  return resolveLanguage(requestedLanguage, navigator.language);
+};
+const getServerLanguage = (): Language => 'en';
 
 function legalUrl(
   document: 'privacy-policy' | 'terms-of-use' | 'support',
@@ -72,9 +81,11 @@ function DownloadButton({
 }
 
 export default function Home() {
-  const requestedLanguage =
-    new URLSearchParams(window.location.search).get('lang') || undefined;
-  const language = resolveLanguage(requestedLanguage, navigator.language);
+  const language = useSyncExternalStore(
+    subscribeLanguage,
+    getBrowserLanguage,
+    getServerLanguage,
+  );
   const t = translations[language];
 
   useEffect(() => {
