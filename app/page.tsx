@@ -105,6 +105,7 @@ export default function Home() {
         </a>
         <nav aria-label={t.navigation}>
           <a href="#how-it-works">{t.navHow}</a>
+          <a href="#photo-icons">{t.navPhoto}</a>
           <a href="#privacy">{t.navPrivacy}</a>
           <div className="language-switcher" aria-label={t.language}>
             {supportedLanguages.map((option) => (
@@ -291,6 +292,53 @@ export default function Home() {
               <small>{t.nothingLeft}</small>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="photo-section" id="photo-icons">
+        <div className="section-shell">
+          <div className="photo-heading">
+            <div>
+              <p className="eyebrow">{t.photoEyebrow}</p>
+              <h2>{t.photoTitle}</h2>
+            </div>
+            <p>{t.photoIntroduction}</p>
+          </div>
+          <div className="photo-showcase">
+            <figure className="photo-showcase-card">
+              <figcaption>
+                <span className="photo-step">01 · {t.photoCreateLabel}</span>
+                <h3>{t.photoCreateTitle}</h3>
+                <p>{t.photoCreateDescription}</p>
+              </figcaption>
+              <div className="photo-screen">
+                <img
+                  src={assetUrl('assets/photo-icon/editor-en.png')}
+                  alt={t.photoEditorAlt}
+                  loading="lazy"
+                  width="1206"
+                  height="2622"
+                />
+              </div>
+            </figure>
+            <figure className="photo-showcase-card photo-showcase-result">
+              <figcaption>
+                <span className="photo-step">02 · {t.photoResultLabel}</span>
+                <h3>{t.photoResultTitle}</h3>
+                <p>{t.photoResultDescription}</p>
+              </figcaption>
+              <div className="photo-screen">
+                <img
+                  src={assetUrl('assets/photo-icon/finished-en.png')}
+                  alt={t.photoResultAlt}
+                  loading="lazy"
+                  width="1206"
+                  height="2622"
+                />
+              </div>
+            </figure>
+          </div>
+          <p className="photo-caption">{t.photoCaption}</p>
         </div>
       </section>
 

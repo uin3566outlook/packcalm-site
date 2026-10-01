@@ -772,6 +772,99 @@ h1 .hero-accent {
   font-size: 11px;
 }
 
+.photo-section {
+  padding-block: 105px;
+  border-top: 1px solid rgba(16, 17, 20, 0.07);
+  background: #f6f1e6;
+}
+.photo-heading {
+  display: grid;
+  grid-template-columns: 1fr minmax(270px, 400px);
+  align-items: end;
+  gap: 48px;
+  margin-bottom: 38px;
+}
+.photo-heading .eyebrow {
+  margin-bottom: 14px;
+}
+.photo-heading h2 {
+  max-width: 650px;
+  margin: 0;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 820;
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+.photo-heading > p {
+  margin: 0 0 3px;
+  color: #5a554d;
+  font-size: 17px;
+  line-height: 1.55;
+}
+.photo-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.photo-showcase-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin: 0;
+  padding: 30px 30px 0;
+  overflow: hidden;
+  border: 1px solid rgba(16, 17, 20, 0.09);
+  border-radius: 32px;
+  background: #fffdf8;
+}
+.photo-showcase-result {
+  background: #f1f5ed;
+}
+.photo-showcase-card figcaption {
+  align-self: stretch;
+}
+.photo-step {
+  color: #8d6826;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.photo-showcase-card h3 {
+  margin: 12px 0 8px;
+  font-size: clamp(27px, 3vw, 36px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+.photo-showcase-card figcaption p {
+  max-width: 450px;
+  margin: 0;
+  color: #5a5853;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.photo-screen {
+  width: min(100%, 325px);
+  overflow: hidden;
+  border: 7px solid #17181b;
+  border-bottom: 0;
+  border-radius: 37px 37px 0 0;
+  background: #fff9eb;
+  box-shadow: 0 22px 50px rgba(42, 35, 20, 0.16);
+}
+.photo-screen img {
+  width: 100%;
+  height: auto;
+}
+.photo-caption {
+  margin: 20px 0 0;
+  color: #6d685f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .essentials-section {
   padding-block: 110px;
   background: #101216;
@@ -1022,6 +1115,10 @@ h1 .hero-accent {
   .steps-grid {
     grid-template-columns: 1fr;
   }
+  .photo-heading {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1132,6 +1229,19 @@ h1 .hero-accent {
   .step-card {
     min-height: 385px;
     padding: 24px;
+  }
+  .photo-section {
+    padding-block: 80px;
+  }
+  .photo-heading h2 {
+    font-size: 42px;
+  }
+  .photo-showcase {
+    grid-template-columns: 1fr;
+  }
+  .photo-showcase-card {
+    gap: 24px;
+    padding: 24px 22px 0;
   }
   .essentials-section {
     padding-block: 82px;
