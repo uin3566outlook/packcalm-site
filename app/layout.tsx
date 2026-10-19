@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   alternates: { canonical: '/' },
-  title: 'PackCalm — Stop remembering. Start packing.',
-  description: 'Reusable packing lists, clear progress, and calmer departures. PackCalm is free for iPhone and keeps your travel data on your device.',
-  applicationName: 'PackCalm',
+  title: 'PackGo — Stop remembering. Start packing.',
+  description: 'Reusable packing lists, clear progress, and calmer departures. PackGo is free for iPhone and keeps your travel data on your device.',
+  applicationName: 'PackGo',
   other: { 'apple-itunes-app': 'app-id=6809829261' },
   icons: {
     icon: '/assets/app-icon.png',
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: 'PackCalm — Stop remembering. Start packing.',
+    title: 'PackGo — Stop remembering. Start packing.',
     description: 'Reusable packing lists for calmer departures.',
-    images: [{ url: socialImageUrl, width: 1200, height: 630, alt: 'PackCalm — reusable packing lists for calmer departures' }],
+    images: [{ url: socialImageUrl, width: 1200, height: 630, alt: 'PackGo — reusable packing lists for calmer departures' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PackCalm — Stop remembering. Start packing.',
+    title: 'PackGo — Stop remembering. Start packing.',
     description: 'Reusable packing lists for calmer departures.',
     images: [socialImageUrl],
   },

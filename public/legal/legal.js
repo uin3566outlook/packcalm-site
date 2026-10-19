@@ -17,18 +17,18 @@
   const chromeCopy = {
     en: {
       privacy: "Privacy", terms: "Terms", support: "Support", privacyPolicy: "Privacy Policy", termsOfUse: "Terms of Use",
-      skip: "Skip to content", language: "Language", navigation: "Site navigation", copyright: "Copyright 2026 Huanwei Ye", error: "This page could not be loaded. Please try again later or update PackCalm.",
-      titles: { "privacy-policy": "PackCalm Privacy Policy", "terms-of-use": "PackCalm Terms of Use", support: "PackCalm Support" },
+      skip: "Skip to content", language: "Language", navigation: "Site navigation", copyright: "Copyright 2026 Huanwei Ye", error: "This page could not be loaded. Please try again later or update PackGo.",
+      titles: { "privacy-policy": "PackGo Privacy Policy", "terms-of-use": "PackGo Terms of Use", support: "PackGo Support" },
     },
     "zh-Hans": {
       privacy: "隐私", terms: "条款", support: "支持", privacyPolicy: "隐私政策", termsOfUse: "使用条款",
-      skip: "跳到正文", language: "语言", navigation: "站点导航", copyright: "版权所有 2026 Huanwei Ye", error: "页面暂时无法加载，请稍后重试或更新 PackCalm。",
-      titles: { "privacy-policy": "PackCalm 隐私政策", "terms-of-use": "PackCalm 使用条款", support: "PackCalm 支持" },
+      skip: "跳到正文", language: "语言", navigation: "站点导航", copyright: "版权所有 2026 Huanwei Ye", error: "页面暂时无法加载，请稍后重试或更新 PackGo。",
+      titles: { "privacy-policy": "PackGo 隐私政策", "terms-of-use": "PackGo 使用条款", support: "PackGo 支持" },
     },
     "zh-Hant": {
       privacy: "隱私", terms: "條款", support: "支援", privacyPolicy: "隱私權政策", termsOfUse: "使用條款",
-      skip: "跳到正文", language: "語言", navigation: "網站導覽", copyright: "版權所有 2026 Huanwei Ye", error: "頁面暫時無法載入，請稍後重試或更新 PackCalm。",
-      titles: { "privacy-policy": "PackCalm 隱私權政策", "terms-of-use": "PackCalm 使用條款", support: "PackCalm 支援" },
+      skip: "跳到正文", language: "語言", navigation: "網站導覽", copyright: "版權所有 2026 Huanwei Ye", error: "頁面暫時無法載入，請稍後重試或更新 PackGo。",
+      titles: { "privacy-policy": "PackGo 隱私權政策", "terms-of-use": "PackGo 使用條款", support: "PackGo 支援" },
     },
   };
 
@@ -135,7 +135,7 @@
     if (languagePicker) languagePicker.setAttribute("aria-label", copy.language);
     if (siteNavigation) siteNavigation.setAttribute("aria-label", copy.navigation);
     if (copyright) copyright.textContent = copy.copyright;
-    document.title = copy.titles[documentName] || "PackCalm";
+    document.title = copy.titles[documentName] || "PackGo";
 
     for (const link of document.querySelectorAll('a[href]')) {
       const rawHref = link.getAttribute("href");
@@ -179,8 +179,8 @@
     button.addEventListener("click", () => selectLanguage(button.dataset.language));
   }
 
-  const source = window.PACKCALM_LEGAL_SOURCE
-    ? Promise.resolve(window.PACKCALM_LEGAL_SOURCE)
+  const source = window.PACKGO_LEGAL_SOURCE
+    ? Promise.resolve(window.PACKGO_LEGAL_SOURCE)
     : fetch(`${documentName}.md`).then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();

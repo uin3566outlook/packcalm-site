@@ -90,7 +90,7 @@ export default function Home() {
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.title = `PackCalm — ${t.heroLine} ${t.heroAccent}`;
+    document.title = `PackGo — ${t.heroLine} ${t.heroAccent}`;
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute('content', t.description);
@@ -101,11 +101,12 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label={t.homeLabel}>
           <img src={assetUrl('assets/app-icon.png')} alt="" />
-          <span>PackCalm</span>
+          <span>PackGo</span>
         </a>
         <nav aria-label={t.navigation}>
           <a href="#how-it-works">{t.navHow}</a>
           <a href="#photo-icons">{t.navPhoto}</a>
+          <a href="#pro">{t.navPro}</a>
           <a href="#privacy">{t.navPrivacy}</a>
           <div className="language-switcher" aria-label={t.language}>
             {supportedLanguages.map((option) => (
@@ -377,6 +378,39 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="plans-section section-shell" id="pro" aria-labelledby="plans-title">
+        <div className="section-heading plans-heading">
+          <p className="eyebrow">{t.plansEyebrow}</p>
+          <h2 id="plans-title">{t.plansTitle}</h2>
+          <p className="plans-introduction">{t.plansIntroduction}</p>
+        </div>
+        <div className="plans-grid">
+          <article className="plan-card">
+            <p className="plan-label">{t.freePlanLabel}</p>
+            <h3>{t.freePlanTitle}</h3>
+            <p className="plan-description">{t.freePlanDescription}</p>
+            <ul>
+              {t.freePlanFeatures.map((feature) => (
+                <li key={feature}><Check size={19} aria-hidden="true" /><span>{feature}</span></li>
+              ))}
+            </ul>
+          </article>
+          <article className="plan-card plan-card-pro">
+            <p className="plan-label">PackGo Pro</p>
+            <h3>{t.proPlanTitle}</h3>
+            <p className="plan-description">{t.proPlanDescription}</p>
+            <ul>
+              {t.proPlanFeatures.map((feature) => (
+                <li key={feature}><Check size={19} aria-hidden="true" /><span>{feature}</span></li>
+              ))}
+              <li><Check size={19} aria-hidden="true" /><span>{t.proShareFeature}<small className="plan-coming-soon">{t.shareComingSoon}</small></span></li>
+            </ul>
+            <p className="plan-purchase-note">{t.purchaseNote}</p>
+          </article>
+        </div>
+        <p className="plan-sharing-note">{t.sharingNote}</p>
+      </section>
+
       <section className="download-section" id="download">
         <div className="download-card">
           <div className="download-glow glow-one" />
@@ -384,7 +418,7 @@ export default function Home() {
           <img
             className="download-icon"
             src={assetUrl('assets/app-icon.png')}
-            alt="PackCalm app icon"
+            alt="PackGo app icon"
           />
           <p className="eyebrow">{t.downloadEyebrow}</p>
           <h2>
@@ -400,7 +434,7 @@ export default function Home() {
       <footer className="site-footer section-shell">
         <a className="brand" href="#top" aria-label={t.topLabel}>
           <img src={assetUrl('assets/app-icon.png')} alt="" />
-          <span>PackCalm</span>
+          <span>PackGo</span>
         </a>
         <p>{t.footerTagline}</p>
         <div className="footer-links">
