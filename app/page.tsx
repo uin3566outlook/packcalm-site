@@ -6,16 +6,9 @@ import {
   ArrowRight,
   Check,
   CheckCircle2,
-  Heart,
-  LibraryBig,
-  Luggage,
-  MapPin,
-  PlaneTakeoff,
+  FileText,
   Repeat2,
-  ShieldCheck,
   Smartphone,
-  Sparkles,
-  Ticket,
 } from 'lucide-react';
 import {
   languageLabels,
@@ -31,22 +24,27 @@ const appStoreLanguages: Record<Language, string> = {
   'zh-Hans': 'zh-Hans-CN',
   'zh-Hant': 'zh-Hant-TW',
 };
-const appStoreUrl = (language: Language) =>
-  `https://apps.apple.com/app/id6809829261?l=${appStoreLanguages[language]}`;
-const assetUrl = (path: string) => `${baseUrl}${path.replace(/^\/+/, '')}`;
+const assetUrl = (path: string) => baseUrl + path.replace(/^\/+/, '');
 const subscribeLanguage = () => () => {};
-const getBrowserLanguage = (): Language => {
-  const requestedLanguage =
-    new URLSearchParams(window.location.search).get('lang') || undefined;
-  return resolveLanguage(requestedLanguage);
-};
+const getBrowserLanguage = (): Language =>
+  resolveLanguage(
+    new URLSearchParams(window.location.search).get('lang') || undefined,
+  );
 const getServerLanguage = (): Language => 'en';
 
 function legalUrl(
   document: 'privacy-policy' | 'terms-of-use' | 'support',
   language: Language,
 ) {
-  return `${baseUrl}legal/${document}.html?lang=${encodeURIComponent(language)}&locked=1#${encodeURIComponent(language)}`;
+  return (
+    baseUrl +
+    'legal/' +
+    document +
+    '.html?lang=' +
+    language +
+    '&locked=1#' +
+    language
+  );
 }
 
 function DownloadButton({
@@ -60,21 +58,19 @@ function DownloadButton({
 }) {
   return (
     <a
-      className={`download-button${compact ? ' download-button-compact' : ''}`}
-      href={appStoreUrl(language)}
+      className={
+        'download-button' + (compact ? ' download-button-compact' : '')
+      }
+      href={
+        'https://apps.apple.com/app/id6809829261?l=' +
+        appStoreLanguages[language]
+      }
       aria-label={copy.appStoreLabel}
     >
-      <Smartphone
-        aria-hidden="true"
-        size={compact ? 18 : 22}
-        strokeWidth={2.2}
-      />
-      <span>
-        <small>{copy.downloadFor}</small>
-        {copy.device}
-      </span>
+      <Smartphone aria-hidden="true" size={compact ? 17 : 24} strokeWidth={2} />
+      <span>{!compact && <small>{copy.downloadFor}</small>}App Store</span>
       {!compact && (
-        <ArrowRight aria-hidden="true" className="download-arrow" size={19} />
+        <ArrowRight aria-hidden="true" size={19} className="download-arrow" />
       )}
     </a>
   );
@@ -87,32 +83,65 @@ export default function Home() {
     getServerLanguage,
   );
   const t = translations[language];
-
   useEffect(() => {
     document.documentElement.lang = language;
-    document.title = `PackGo — ${t.heroLine} ${t.heroAccent}`;
+    document.title = 'PackGo — ' + t.heroLine + ' ' + t.heroAccent;
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute('content', t.description);
   }, [language, t]);
-
+  const steps = [
+    {
+      Icon: FileText,
+      title: t.saveTitle,
+      description: t.saveDescription,
+      color: 'blue',
+    },
+    {
+      Icon: Repeat2,
+      title: t.reuseTitle,
+      description: t.reuseDescription,
+      color: 'mint',
+    },
+    {
+      Icon: CheckCircle2,
+      title: t.confidenceTitle,
+      description: t.confidenceDescription,
+      color: 'yellow',
+    },
+  ];
   return (
     <main>
-      <header className="site-header">
+      <a className="skip-link" href="#how-it-works">
+        {t.skipLabel}
+      </a>
+      <header className="site-header section-shell">
         <a className="brand" href="#top" aria-label={t.homeLabel}>
-          <img src={assetUrl('assets/app-icon.png')} alt="" />
+          <img
+            src={assetUrl('assets/app-icon.png')}
+            width="40"
+            height="40"
+            alt=""
+          />
           <span>PackGo</span>
         </a>
         <nav aria-label={t.navigation}>
-          <a href="#how-it-works">{t.navHow}</a>
-          <a href="#photo-icons">{t.navPhoto}</a>
-          <a href="#pro">{t.navPro}</a>
-          <a href="#privacy">{t.navPrivacy}</a>
-          <div className="language-switcher" aria-label={t.language}>
+          <a className="nav-link" href="#how-it-works">
+            {t.navHow}
+          </a>
+          <a className="nav-link" href="#pro">
+            Pro
+          </a>
+          <div
+            className="language-switcher"
+            role="group"
+            aria-label={t.language}
+          >
             {supportedLanguages.map((option) => (
               <a
-                href={`${baseUrl}?lang=${option}`}
+                href={baseUrl + '?lang=' + option}
                 hrefLang={option}
+                aria-label={t.languageNames[option]}
                 aria-current={option === language ? 'page' : undefined}
                 key={option}
               >
@@ -123,320 +152,169 @@ export default function Home() {
           <DownloadButton copy={t} language={language} compact />
         </nav>
       </header>
-
-      <section className="hero" id="top">
-        <div className="travel-atmosphere" aria-hidden="true">
-          <div className="travel-route">
-            <span>{t.home}</span>
-            <i />
-            <PlaneTakeoff size={18} strokeWidth={1.8} />
-            <i />
-            <span>{t.nextTrip}</span>
-          </div>
-          <div className="departure-stamp">
-            <Ticket size={27} strokeWidth={1.6} />
-            <span>
-              <small>{t.departure}</small>
-              <strong>{t.gate}</strong>
-            </span>
-          </div>
-          <div className="travel-tag">
-            <Luggage size={32} strokeWidth={1.5} />
-            <span>
-              <small>{t.packed}</small>
-              <strong>{t.readyToGo}</strong>
-            </span>
-          </div>
-          <MapPin className="travel-pin" size={72} strokeWidth={1.1} />
-          <div className="packing-checklist">
-            <small>{t.packingList}</small>
-            <span>
-              <Check size={12} /> {t.passport}
-            </span>
-            <span>
-              <Check size={12} /> {t.charger}
-            </span>
-            <span>
-              <Check size={12} /> {t.headphones}
-            </span>
-          </div>
-          <div className="packing-items">
-            {['passport', 'laptop', 'headphones', 'toothbrush', 'jacket'].map(
-              (item) => (
-                <span className={`packing-item packing-${item}`} key={item}>
-                  <img src={assetUrl(`assets/items/${item}.svg`)} alt="" />
-                </span>
-              ),
-            )}
-          </div>
-        </div>
+      <section
+        className="hero section-shell"
+        id="top"
+        aria-labelledby="hero-title"
+      >
         <div className="hero-copy">
-          <p className="eyebrow">{t.eyebrow}</p>
-          <h1>
-            <span className="hero-line">{t.heroLine}</span>
+          <h1 id="hero-title">
+            <span>{t.heroLine}</span>
             <span className="hero-accent">{t.heroAccent}</span>
           </h1>
           <p className="hero-description">{t.description}</p>
-          <div className="hero-actions">
-            <DownloadButton copy={t} language={language} />
-            <a className="text-link" href="#how-it-works">
-              {t.seeHow} <span>↓</span>
-            </a>
-          </div>
+          <DownloadButton copy={t} language={language} />
           <ul className="trust-list" aria-label={t.highlights}>
             {t.trust.map((note) => (
-              <li key={note}>{note}</li>
+              <li key={note}>
+                <Check size={13} aria-hidden="true" />
+                {note}
+              </li>
             ))}
           </ul>
         </div>
-
         <div className="hero-visual" aria-label={t.preview}>
-          <div className="color-orb color-orb-blue" />
-          <div className="color-orb color-orb-lilac" />
           <div className="phone phone-back phone-left">
             <img
-              src={assetUrl(`assets/latest/${language}/trips.webp`)}
+              src={assetUrl('assets/latest/' + language + '/trips.webp')}
               alt={t.tripsAlt}
-              loading="eager"
-              decoding="sync"
+              width="736"
+              height="1600"
             />
           </div>
           <div className="phone phone-front">
             <img
-              src={assetUrl(`assets/latest/${language}/packing.webp`)}
+              src={assetUrl('assets/latest/' + language + '/packing.webp')}
               alt={t.packingAlt}
-              loading="eager"
-              decoding="sync"
+              width="736"
+              height="1600"
               fetchPriority="high"
             />
           </div>
           <div className="phone phone-back phone-right">
             <img
-              src={assetUrl(`assets/latest/${language}/items.webp`)}
+              src={assetUrl('assets/latest/' + language + '/items.webp')}
               alt={t.itemsAlt}
-              loading="eager"
-              decoding="sync"
+              width="736"
+              height="1600"
             />
           </div>
-          <div className="floating-note note-ready">
-            <strong>{t.readyCount}</strong>
-            <span>{t.readyCaption}</span>
-          </div>
-          <div className="floating-note note-private">
-            <strong>{t.localTitle}</strong>
-            <span>{t.localCaption}</span>
-          </div>
+          <img
+            className="hero-decoration decoration-passport"
+            src={assetUrl('assets/items/passport.svg')}
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            className="hero-decoration decoration-jacket"
+            src={assetUrl('assets/items/jacket.svg')}
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            className="hero-decoration decoration-headphones"
+            src={assetUrl('assets/items/headphones.svg')}
+            alt=""
+            aria-hidden="true"
+          />
         </div>
       </section>
-
-      <section className="steps-section section-shell" id="how-it-works">
-        <div className="section-heading steps-title">
-          <p className="eyebrow">{t.howEyebrow}</p>
-          <h2>{t.howTitle}</h2>
-        </div>
-        <div className="steps-grid">
-          <article className="step-card step-card-blue">
-            <span className="step-icon">
-              <LibraryBig size={23} />
+      <section
+        className="steps-section section-shell"
+        id="how-it-works"
+        aria-label={t.navHow}
+      >
+        {steps.map(({ Icon, title, description, color }) => (
+          <article className="step" key={title}>
+            <span className={'step-icon step-icon-' + color}>
+              <Icon size={29} strokeWidth={1.8} aria-hidden="true" />
             </span>
-            <span className="step-number">01</span>
-            <h3>{t.saveTitle}</h3>
-            <p>{t.saveDescription}</p>
-            <div className="mini-shelf" aria-hidden="true">
-              {['passport', 'phone', 'laptop', 'headphones'].map(
-                (item, index) => (
-                  <span
-                    className={`color-${['mint', 'blue', 'lilac', 'ink'][index]}`}
-                    key={item}
-                  >
-                    <img src={assetUrl(`assets/items/${item}.svg`)} alt="" />
-                  </span>
-                ),
-              )}
-            </div>
-          </article>
-          <article className="step-card step-card-mint">
-            <span className="step-icon">
-              <Repeat2 size={23} />
-            </span>
-            <span className="step-number">02</span>
-            <h3>{t.reuseTitle}</h3>
-            <p>{t.reuseDescription}</p>
-            <div className="reuse-list" aria-hidden="true">
-              <span>
-                <Heart size={16} fill="currentColor" /> {t.coreList}{' '}
-                <Check size={16} />
-              </span>
-              <span>
-                <Sparkles size={16} /> {t.businessTrip} <Check size={16} />
-              </span>
-              <span>
-                <PlaneTakeoff size={16} /> {t.beachWeekend} <Check size={16} />
-              </span>
-            </div>
-          </article>
-          <article className="step-card step-card-yellow">
-            <span className="step-icon">
-              <CheckCircle2 size={23} />
-            </span>
-            <span className="step-number">03</span>
-            <h3>{t.confidenceTitle}</h3>
-            <p>{t.confidenceDescription}</p>
-            <div className="progress-card" aria-hidden="true">
-              <div>
-                <strong>{t.ready}</strong>
-                <strong>100%</strong>
-              </div>
-              <span>
-                <i />
-              </span>
-              <small>{t.nothingLeft}</small>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="photo-section" id="photo-icons">
-        <div className="section-shell">
-          <div className="photo-heading">
             <div>
-              <p className="eyebrow">{t.photoEyebrow}</p>
-              <h2>{t.photoTitle}</h2>
+              <h2>{title}</h2>
+              <p>{description}</p>
             </div>
-            <p>{t.photoIntroduction}</p>
-          </div>
-          <div className="photo-showcase">
-            <figure className="photo-showcase-card">
-              <figcaption>
-                <span className="photo-step">01 · {t.photoCreateLabel}</span>
-                <h3>{t.photoCreateTitle}</h3>
-                <p>{t.photoCreateDescription}</p>
-              </figcaption>
-              <div className="photo-screen">
-                <img
-                  src={assetUrl('assets/photo-icon/editor-en.png')}
-                  alt={t.photoEditorAlt}
-                  loading="lazy"
-                  width="1206"
-                  height="2622"
-                />
-              </div>
-            </figure>
-            <figure className="photo-showcase-card photo-showcase-result">
-              <figcaption>
-                <span className="photo-step">02 · {t.photoResultLabel}</span>
-                <h3>{t.photoResultTitle}</h3>
-                <p>{t.photoResultDescription}</p>
-              </figcaption>
-              <div className="photo-screen">
-                <img
-                  src={assetUrl('assets/photo-icon/finished-en.png')}
-                  alt={t.photoResultAlt}
-                  loading="lazy"
-                  width="1206"
-                  height="2622"
-                />
-              </div>
-            </figure>
+          </article>
+        ))}
+      </section>
+      <div className="details-grid section-shell">
+        <section
+          className="photo-feature"
+          id="photo-icons"
+          aria-labelledby="photo-title"
+        >
+          <h2 id="photo-title">{t.photoTitle}</h2>
+          <p>{t.photoDescription}</p>
+          <div className="photo-screen">
+            <img
+              src={assetUrl('assets/photo-icon/editor-en.png')}
+              alt={t.photoEditorAlt}
+              width="1206"
+              height="2622"
+              loading="lazy"
+            />
           </div>
           <p className="photo-caption">{t.photoCaption}</p>
-        </div>
-      </section>
-
-      <section className="essentials-section" id="privacy">
-        <div className="section-shell essentials-shell">
-          <div className="essentials-heading">
-            <p className="eyebrow">{t.simpleEyebrow}</p>
-            <h2>
-              {t.essentialsTitle[0]}
-              <br />
-              {t.essentialsTitle[1]}
-            </h2>
+        </section>
+        <section
+          className="plans-section"
+          id="pro"
+          aria-labelledby="plans-title"
+        >
+          <div className="plans-heading">
+            <h2 id="plans-title">{t.plansTitle}</h2>
+            <p>{t.plansSubtitle}</p>
           </div>
-          <div className="essentials-grid">
-            <article>
-              <span className="essentials-icon essentials-icon-mint">
-                <ShieldCheck size={26} />
-              </span>
-              <h3>{t.privateTitle}</h3>
-              <p>{t.privateDescription}</p>
-              <span className="essentials-proof">
-                <Check size={16} /> {t.privateProof}
-              </span>
+          <div className="plans-grid">
+            <article className="plan-card plan-card-free">
+              <h3>{t.freePlanLabel}</h3>
+              <ul>
+                {t.freePlanFeatures.map((feature) => (
+                  <li key={feature}>
+                    <Check size={18} aria-hidden="true" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </article>
-            <article>
-              <span className="essentials-icon essentials-icon-yellow">
-                <Sparkles size={26} />
-              </span>
-              <h3>{t.freeTitle}</h3>
-              <p>{t.freeDescription}</p>
-              <span className="essentials-proof">
-                <Check size={16} /> {t.freeProof}
-              </span>
+            <article className="plan-card plan-card-pro">
+              <h3>PackGo Pro</h3>
+              <ul>
+                {t.proPlanFeatures.map((feature) => (
+                  <li key={feature}>
+                    <Check size={18} aria-hidden="true" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+                <li>
+                  <Check size={18} aria-hidden="true" />
+                  <span>
+                    {t.proShareFeature}
+                    <small className="plan-coming-soon">
+                      {t.shareComingSoon}
+                    </small>
+                  </span>
+                </li>
+              </ul>
             </article>
           </div>
-        </div>
-      </section>
-
-      <section className="plans-section section-shell" id="pro" aria-labelledby="plans-title">
-        <div className="section-heading plans-heading">
-          <p className="eyebrow">{t.plansEyebrow}</p>
-          <h2 id="plans-title">{t.plansTitle}</h2>
-          <p className="plans-introduction">{t.plansIntroduction}</p>
-        </div>
-        <div className="plans-grid">
-          <article className="plan-card">
-            <p className="plan-label">{t.freePlanLabel}</p>
-            <h3>{t.freePlanTitle}</h3>
-            <p className="plan-description">{t.freePlanDescription}</p>
-            <ul>
-              {t.freePlanFeatures.map((feature) => (
-                <li key={feature}><Check size={19} aria-hidden="true" /><span>{feature}</span></li>
-              ))}
-            </ul>
-          </article>
-          <article className="plan-card plan-card-pro">
-            <p className="plan-label">PackGo Pro</p>
-            <h3>{t.proPlanTitle}</h3>
-            <p className="plan-description">{t.proPlanDescription}</p>
-            <ul>
-              {t.proPlanFeatures.map((feature) => (
-                <li key={feature}><Check size={19} aria-hidden="true" /><span>{feature}</span></li>
-              ))}
-              <li><Check size={19} aria-hidden="true" /><span>{t.proShareFeature}<small className="plan-coming-soon">{t.shareComingSoon}</small></span></li>
-            </ul>
-            <p className="plan-purchase-note">{t.purchaseNote}</p>
-          </article>
-        </div>
-        <p className="plan-sharing-note">{t.sharingNote}</p>
-      </section>
-
-      <section className="download-section" id="download">
-        <div className="download-card">
-          <div className="download-glow glow-one" />
-          <div className="download-glow glow-two" />
-          <img
-            className="download-icon"
-            src={assetUrl('assets/app-icon.png')}
-            alt="PackGo app icon"
-          />
-          <p className="eyebrow">{t.downloadEyebrow}</p>
-          <h2>
-            {t.downloadTitle[0]}
-            <br />
-            {t.downloadTitle[1]}
-          </h2>
-          <p>{t.downloadDescription}</p>
-          <DownloadButton copy={t} language={language} />
-        </div>
-      </section>
-
-      <footer className="site-footer section-shell">
+          <p className="plan-sharing-note">{t.sharingNote}</p>
+          <p className="plan-purchase-note">{t.purchaseNote}</p>
+        </section>
+      </div>
+      <div className="download-section section-shell" id="download">
+        <DownloadButton copy={t} language={language} />
+      </div>
+      <footer className="site-footer section-shell" id="privacy">
         <a className="brand" href="#top" aria-label={t.topLabel}>
-          <img src={assetUrl('assets/app-icon.png')} alt="" />
+          <img
+            src={assetUrl('assets/app-icon.png')}
+            width="32"
+            height="32"
+            alt=""
+          />
           <span>PackGo</span>
         </a>
-        <p>{t.footerTagline}</p>
+        <p className="footer-tagline">{t.footerTagline}</p>
         <div className="footer-links">
           <a href={legalUrl('privacy-policy', language)}>{t.privacy}</a>
           <a href={legalUrl('terms-of-use', language)}>{t.terms}</a>
