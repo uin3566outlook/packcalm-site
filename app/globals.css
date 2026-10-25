@@ -38,7 +38,8 @@ img {
   max-width: 100%;
   height: auto;
 }
-a:focus-visible {
+a:focus-visible,
+select:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 5px;
 }
@@ -100,24 +101,22 @@ a:focus-visible {
 .language-switcher {
   display: flex;
   align-items: center;
-  padding: 3px;
+  gap: 5px;
+  padding: 3px 9px;
   border: 1px solid var(--line);
   border-radius: 99px;
   background: #fffdf6;
 }
-.language-switcher a {
-  display: grid;
-  min-width: 32px;
-  height: 32px;
-  place-items: center;
-  border-radius: 99px;
+.language-switcher select {
+  width: 146px;
+  max-width: 100%;
+  min-height: 36px;
+  border: 0;
+  background: transparent;
   color: #69665e;
-  font-size: 11px;
-  font-weight: 700;
-}
-.language-switcher a[aria-current='page'] {
-  background: var(--foreground);
-  color: white;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
 }
 .download-button {
   display: inline-flex;
@@ -165,6 +164,7 @@ a:focus-visible {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 .hero {
   position: relative;
@@ -190,7 +190,8 @@ h1 {
 }
 h1 span {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
 }
 html:lang(en) h1 {
   font-size: clamp(42px, 5.4vw, 74px);
@@ -304,8 +305,8 @@ html:lang(en) h1 {
   min-width: 0;
 }
 .step + .step {
-  padding-left: 24px;
-  border-left: 1px solid #dedbce;
+  padding-inline-start: 24px;
+  border-inline-start: 1px solid #dedbce;
 }
 .step-icon {
   display: grid;
@@ -541,7 +542,7 @@ html:lang(en) h1 {
     gap: 14px;
   }
   .step + .step {
-    padding-left: 18px;
+    padding-inline-start: 18px;
   }
   .step-icon {
     width: 68px;
@@ -630,7 +631,7 @@ html:lang(en) h1 {
     gap: 14px;
   }
   .step + .step {
-    padding-left: 18px;
+    padding-inline-start: 18px;
   }
   .step h2 {
     font-size: 20px;
@@ -665,7 +666,7 @@ html:lang(en) h1 {
   .photo-feature .photo-caption {
     align-self: start;
     margin-top: 12px;
-    text-align: left;
+    text-align: start;
   }
   .plans-section {
     padding: 30px;
@@ -714,11 +715,10 @@ html:lang(en) h1 {
     display: none;
   }
   .language-switcher {
-    padding: 2px;
+    padding: 2px 6px;
   }
-  .language-switcher a {
-    min-width: 32px;
-    height: 36px;
+  .language-switcher select {
+    width: 120px;
   }
   .download-button-compact {
     min-height: 40px;
@@ -809,8 +809,8 @@ html:lang(en) h1 {
     padding-block: 20px;
   }
   .step + .step {
-    padding-left: 0;
-    border-left: 0;
+    padding-inline-start: 0;
+    border-inline-start: 0;
     border-top: 1px solid var(--line);
   }
   .step-icon {
@@ -921,8 +921,31 @@ html:lang(en) h1 {
     width: 28px;
     height: 28px;
   }
-  .language-switcher a {
-    min-width: 28px;
+  .language-switcher select {
+    width: 90px;
+    font-size: 11px;
+  }
+  .language-switcher { padding-inline: 4px; }
+  .language-switcher > svg {
+    display: none;
+  }
+}
+
+html:not(:lang(en)):not(:lang(zh-Hans)):not(:lang(zh-Hant)) h1 {
+  font-size: clamp(38px, 4.4vw, 64px);
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+html[dir='rtl'] .download-arrow {
+  transform: scaleX(-1);
+}
+html[dir='rtl'] .brand,
+html[dir='rtl'] .copyright {
+  unicode-bidi: isolate;
+}
+@media (max-width: 600px) {
+  html:not(:lang(en)):not(:lang(zh-Hans)):not(:lang(zh-Hant)) h1 {
+    font-size: clamp(32px, 9vw, 48px);
   }
 }
 @media (prefers-reduced-motion: reduce) {

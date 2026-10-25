@@ -21,7 +21,7 @@ a { color: var(--accent); text-underline-offset: .18em; }
 
 .skip-link {
   position: fixed;
-  left: 12px;
+  inset-inline-start: 12px;
   top: -60px;
   z-index: 10;
   padding: 10px 14px;
@@ -62,35 +62,26 @@ a { color: var(--accent); text-underline-offset: .18em; }
   padding: 30px 0 52px;
 }
 
-.language-picker {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin: 0 0 30px;
-  padding: 5px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--surface);
-  box-shadow: var(--shadow);
+ .language-picker {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 24px;
 }
-
-.language-picker button {
-  min-height: 40px;
-  padding: 7px 8px;
-  border: 0;
+.language-picker select {
+  max-width: 100%;
+  min-height: 42px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
   border-radius: 10px;
-  background: transparent;
-  color: var(--secondary);
+  background: var(--surface);
+  color: var(--ink);
   font: inherit;
-  font-size: .84rem;
-  font-weight: 650;
+  font-size: .88rem;
   cursor: pointer;
 }
-
-.language-picker button[aria-current="true"] {
-  background: var(--accent-soft);
-  color: #2f2106;
-}
+.language-picker select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+[dir="rtl"] .brand, a[href^="mailto:"], a[href^="http"] { unicode-bidi: isolate; }
+.legal-content { overflow-wrap: anywhere; }
 
 .language-locked .language-picker { display: none; }
 
@@ -102,7 +93,7 @@ p { margin: 0 0 1rem; }
 h1 + p,
 h1 + p + p { color: var(--secondary); }
 strong { color: var(--ink); }
-ul { margin: .25rem 0 1rem; padding-left: 1.35rem; }
+ul { margin: .25rem 0 1rem; padding-inline-start: 1.35rem; }
 li + li { margin-top: .35rem; }
 
 .legal-section {
@@ -181,7 +172,7 @@ code {
   .site-header-inner { align-items: flex-start; flex-direction: column; gap: 5px; padding-block: 10px; }
   .site-nav { gap: 14px; }
   .page-shell { width: min(calc(100% - 24px), 760px); padding-top: 22px; }
-  .language-picker button { font-size: .78rem; }
+  .language-picker select { font-size: .85rem; }
   .site-footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; gap: 8px; padding-block: 18px; }
   .footer-links { justify-content: flex-start; }
 }

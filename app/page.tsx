@@ -7,12 +7,14 @@ import {
   Check,
   CheckCircle2,
   FileText,
+  Globe2,
   Repeat2,
   Smartphone,
 } from 'lucide-react';
 import {
   languageLabels,
   resolveLanguage,
+  resolvePreferredLanguage,
   supportedLanguages,
   translations,
   type Language,
@@ -23,14 +25,36 @@ const appStoreLanguages: Record<Language, string> = {
   en: 'en-US',
   'zh-Hans': 'zh-Hans-CN',
   'zh-Hant': 'zh-Hant-TW',
+  ja: 'ja-JP', ko: 'ko-KR', es: 'es-MX', 'pt-BR': 'pt-BR',
+  fr: 'fr-CA', id: 'id-ID', th: 'th-TH', vi: 'vi-VN', ar: 'ar-SA',
 };
 const assetUrl = (path: string) => baseUrl + path.replace(/^\/+/, '');
-const subscribeLanguage = () => () => {};
-const getBrowserLanguage = (): Language =>
-  resolveLanguage(
-    new URLSearchParams(window.location.search).get('lang') || undefined,
-  );
+const screenshotUrl = (language: Language, screen: string) => {
+  return assetUrl(`assets/latest/${language}/${screen}.png`);
+};
+const languageEvent = 'packgo-language-change';
+const subscribeLanguage = (onChange: () => void) => {
+  window.addEventListener('popstate', onChange);
+  window.addEventListener('languagechange', onChange);
+  window.addEventListener(languageEvent, onChange);
+  return () => {
+    window.removeEventListener('popstate', onChange);
+    window.removeEventListener('languagechange', onChange);
+    window.removeEventListener(languageEvent, onChange);
+  };
+};
+const getBrowserLanguage = (): Language => {
+  const requested = new URLSearchParams(window.location.search).get('lang');
+  return requested ? resolveLanguage(requested) : resolvePreferredLanguage(navigator.languages);
+};
 const getServerLanguage = (): Language => 'en';
+
+function selectLanguage(language: Language) {
+  const url = new URL(window.location.href);
+  url.searchParams.set('lang', language);
+  window.history.pushState(null, '', url);
+  window.dispatchEvent(new Event(languageEvent));
+}
 
 function legalUrl(
   document: 'privacy-policy' | 'terms-of-use' | 'support',
@@ -85,6 +109,7 @@ export default function Home() {
   const t = translations[language];
   useEffect(() => {
     document.documentElement.lang = language;
+    document.documentElement.dir = language.startsWith('ar') ? 'rtl' : 'ltr';
     document.title = 'PackGo — ' + t.heroLine + ' ' + t.heroAccent;
     document
       .querySelector('meta[name="description"]')
@@ -132,23 +157,20 @@ export default function Home() {
           <a className="nav-link" href="#pro">
             Pro
           </a>
-          <div
-            className="language-switcher"
-            role="group"
-            aria-label={t.language}
-          >
-            {supportedLanguages.map((option) => (
-              <a
-                href={baseUrl + '?lang=' + option}
-                hrefLang={option}
-                aria-label={t.languageNames[option]}
-                aria-current={option === language ? 'page' : undefined}
-                key={option}
-              >
-                {languageLabels[option]}
-              </a>
-            ))}
-          </div>
+          <label className="language-switcher">
+            <Globe2 size={16} aria-hidden="true" />
+            <select
+              aria-label={t.language}
+              value={language}
+              onChange={(event) => selectLanguage(resolveLanguage(event.target.value))}
+            >
+              {supportedLanguages.map((option) => (
+                <option value={option} lang={option} key={option}>
+                  {languageLabels[option]}
+                </option>
+              ))}
+            </select>
+          </label>
           <DownloadButton copy={t} language={language} compact />
         </nav>
       </header>
@@ -176,7 +198,7 @@ export default function Home() {
         <div className="hero-visual" aria-label={t.preview}>
           <div className="phone phone-back phone-left">
             <img
-              src={assetUrl('assets/latest/' + language + '/trips.webp')}
+              src={screenshotUrl(language, 'trips')}
               alt={t.tripsAlt}
               width="736"
               height="1600"
@@ -184,7 +206,7 @@ export default function Home() {
           </div>
           <div className="phone phone-front">
             <img
-              src={assetUrl('assets/latest/' + language + '/packing.webp')}
+              src={screenshotUrl(language, 'packing')}
               alt={t.packingAlt}
               width="736"
               height="1600"
@@ -193,7 +215,7 @@ export default function Home() {
           </div>
           <div className="phone phone-back phone-right">
             <img
-              src={assetUrl('assets/latest/' + language + '/items.webp')}
+              src={screenshotUrl(language, 'items')}
               alt={t.itemsAlt}
               width="736"
               height="1600"
@@ -246,7 +268,7 @@ export default function Home() {
           <p>{t.photoDescription}</p>
           <div className="photo-screen">
             <img
-              src={assetUrl('assets/photo-icon/editor-en.png')}
+              src={screenshotUrl(language, 'photo-icon')}
               alt={t.photoEditorAlt}
               width="1206"
               height="2622"
@@ -289,9 +311,6 @@ export default function Home() {
                   <Check size={18} aria-hidden="true" />
                   <span>
                     {t.proShareFeature}
-                    <small className="plan-coming-soon">
-                      {t.shareComingSoon}
-                    </small>
                   </span>
                 </li>
               </ul>
