@@ -12,6 +12,12 @@
   "languageNote": "Segue o idioma do iPhone. Você pode alterá-lo nos ajustes do app.",
   "downloadFor": "Baixe na",
   "appStoreLabel": "Baixar PackGo na App Store",
+  "downloadTitle": "Baixe o PackGo no seu iPhone",
+  "scanToDownload": "Escaneie com a câmera do iPhone para abrir o PackGo na App Store.",
+  "downloadQrAlt": "Código QR do PackGo na App Store",
+  "downloadAvailability": "A disponibilidade depende da região da sua Conta Apple. Não está disponível na China continental. Se o link abrir a página inicial da loja, escaneie com o iPhone.",
+  "viewInBrowser": "Ver a página da App Store na web",
+  "closeDownload": "Fechar janela de download",
   "highlights": "Destaques do produto",
   "trust": [
     "Funciona offline",

@@ -12,6 +12,12 @@
   "languageNote": "ใช้ภาษาตาม iPhone โดยอัตโนมัติ หรือเปลี่ยนได้ในการตั้งค่าแอป",
   "downloadFor": "ดาวน์โหลดบน",
   "appStoreLabel": "ดาวน์โหลด PackGo บน App Store",
+  "downloadTitle": "ดาวน์โหลด PackGo บน iPhone",
+  "scanToDownload": "สแกนด้วยกล้อง iPhone เพื่อเปิด PackGo ใน App Store",
+  "downloadQrAlt": "คิวอาร์โค้ดของ PackGo ใน App Store",
+  "downloadAvailability": "ความพร้อมให้ดาวน์โหลดขึ้นอยู่กับภูมิภาคของบัญชี Apple ยังไม่พร้อมให้บริการในจีนแผ่นดินใหญ่ หากลิงก์เว็บเปิดหน้าหลักของร้านค้า ให้สแกนด้วย iPhone",
+  "viewInBrowser": "ดูหน้าเว็บ App Store",
+  "closeDownload": "ปิดหน้าต่างดาวน์โหลด",
   "highlights": "จุดเด่นของแอป",
   "trust": [
     "ใช้งานออฟไลน์",

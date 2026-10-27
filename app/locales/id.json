@@ -12,6 +12,12 @@
   "languageNote": "Mengikuti bahasa iPhone Anda. Ubah kapan saja di pengaturan aplikasi.",
   "downloadFor": "Unduh di",
   "appStoreLabel": "Unduh PackGo di App Store",
+  "downloadTitle": "Unduh PackGo di iPhone Anda",
+  "scanToDownload": "Pindai dengan kamera iPhone untuk membuka PackGo di App Store.",
+  "downloadQrAlt": "Kode QR PackGo di App Store",
+  "downloadAvailability": "Ketersediaan bergantung pada wilayah Akun Apple Anda. Tidak tersedia di Tiongkok daratan. Jika tautan web membuka beranda toko, pindai dengan iPhone Anda.",
+  "viewInBrowser": "Lihat halaman web App Store",
+  "closeDownload": "Tutup jendela unduhan",
   "highlights": "Fitur unggulan",
   "trust": [
     "Bisa digunakan luring",

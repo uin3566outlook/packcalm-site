@@ -12,6 +12,12 @@
   "languageNote": "Tự động dùng ngôn ngữ của iPhone. Bạn có thể đổi trong phần cài đặt ứng dụng.",
   "downloadFor": "Tải trên",
   "appStoreLabel": "Tải PackGo trên App Store",
+  "downloadTitle": "Tải PackGo trên iPhone",
+  "scanToDownload": "Quét bằng camera iPhone để mở PackGo trong App Store.",
+  "downloadQrAlt": "Mã QR của PackGo trên App Store",
+  "downloadAvailability": "Khả năng tải về tùy thuộc vào khu vực của Tài khoản Apple. Chưa có tại Trung Quốc đại lục. Nếu liên kết web mở trang chủ cửa hàng, hãy quét bằng iPhone.",
+  "viewInBrowser": "Xem trang web App Store",
+  "closeDownload": "Đóng cửa sổ tải về",
   "highlights": "Điểm nổi bật",
   "trust": [
     "Dùng ngoại tuyến",

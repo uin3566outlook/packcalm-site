@@ -12,6 +12,12 @@
   "languageNote": "iPhone の言語に自動で合わせます。アプリの設定からいつでも変更できます。",
   "downloadFor": "ダウンロードはこちら",
   "appStoreLabel": "App Store で PackGo をダウンロード",
+  "downloadTitle": "iPhone に PackGo をダウンロード",
+  "scanToDownload": "iPhone のカメラで読み取り、App Store で PackGo を開いてください。",
+  "downloadQrAlt": "PackGo の App Store ダウンロード用 QR コード",
+  "downloadAvailability": "利用できるかどうかは Apple アカウントの国や地域によって異なります。中国本土では未配信です。Web リンクでストアのトップページが開く場合は、iPhone で読み取ってください。",
+  "viewInBrowser": "App Store の Web ページを見る",
+  "closeDownload": "ダウンロード画面を閉じる",
   "highlights": "主な機能",
   "trust": [
     "オフラインで使える",

@@ -1,7 +1,7 @@
 'use client';
 
 /* oxlint-disable next/no-img-element */
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useSyncExternalStore, type MouseEventHandler } from 'react';
 import {
   ArrowRight,
   Check,
@@ -10,6 +10,7 @@ import {
   Globe2,
   Repeat2,
   Smartphone,
+  X,
 } from 'lucide-react';
 import {
   languageLabels,
@@ -21,6 +22,7 @@ import {
 } from './translations';
 
 const baseUrl = import.meta.env.BASE_URL;
+const appStoreUrl = 'https://apps.apple.com/us/app/packgo-travel-packing-list/id6809829261';
 const appStoreLanguages: Record<Language, string> = {
   en: 'en-US',
   'zh-Hans': 'zh-Hans-CN',
@@ -75,10 +77,12 @@ function DownloadButton({
   copy,
   language,
   compact = false,
+  onClick,
 }: {
   copy: (typeof translations)[Language];
   language: Language;
   compact?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }) {
   return (
     <a
@@ -86,10 +90,11 @@ function DownloadButton({
         'download-button' + (compact ? ' download-button-compact' : '')
       }
       href={
-        'https://apps.apple.com/app/id6809829261?l=' +
+        appStoreUrl + '?l=' +
         appStoreLanguages[language]
       }
       aria-label={copy.appStoreLabel}
+      onClick={onClick}
     >
       <Smartphone aria-hidden="true" size={compact ? 17 : 24} strokeWidth={2} />
       <span>{!compact && <small>{copy.downloadFor}</small>}App Store</span>
@@ -101,12 +106,22 @@ function DownloadButton({
 }
 
 export default function Home() {
+  const downloadDialog = useRef<HTMLDialogElement>(null);
   const language = useSyncExternalStore(
     subscribeLanguage,
     getBrowserLanguage,
     getServerLanguage,
   );
   const t = translations[language];
+  const handleDownloadClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!isMobile && downloadDialog.current?.showModal) {
+      event.preventDefault();
+      downloadDialog.current.showModal();
+    }
+  };
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = language.startsWith('ar') ? 'rtl' : 'ltr';
@@ -171,7 +186,7 @@ export default function Home() {
               ))}
             </select>
           </label>
-          <DownloadButton copy={t} language={language} compact />
+          <DownloadButton copy={t} language={language} compact onClick={handleDownloadClick} />
         </nav>
       </header>
       <section
@@ -189,7 +204,7 @@ export default function Home() {
             <span className="hero-accent">{t.heroAccent}</span>
           </h1>
           <p className="hero-description">{t.description}</p>
-          <DownloadButton copy={t} language={language} />
+          <DownloadButton copy={t} language={language} onClick={handleDownloadClick} />
           <ul className="trust-list" aria-label={t.highlights}>
             {t.trust.map((note) => (
               <li key={note}>
@@ -326,7 +341,7 @@ export default function Home() {
         </section>
       </div>
       <div className="download-section section-shell" id="download">
-        <DownloadButton copy={t} language={language} />
+        <DownloadButton copy={t} language={language} onClick={handleDownloadClick} />
       </div>
       <footer className="site-footer section-shell" id="privacy">
         <a className="brand" href="#top" aria-label={t.topLabel}>
@@ -346,6 +361,39 @@ export default function Home() {
         </div>
         <p className="copyright">{t.copyright}</p>
       </footer>
+      <dialog
+        ref={downloadDialog}
+        className="download-dialog"
+        aria-labelledby="download-dialog-title"
+        aria-describedby="download-dialog-description"
+      >
+        <div className="download-dialog-content">
+          <form method="dialog">
+            <button type="submit" className="download-dialog-close" aria-label={t.closeDownload}>
+              <X size={20} aria-hidden="true" />
+            </button>
+          </form>
+          <h2 id="download-dialog-title">{t.downloadTitle}</h2>
+          <p id="download-dialog-description">{t.scanToDownload}</p>
+          <img
+            className="download-qr"
+            src={assetUrl('assets/app-store-qr.png')}
+            alt={t.downloadQrAlt}
+            width="216"
+            height="216"
+          />
+          <p className="download-availability">{t.downloadAvailability}</p>
+          <a
+            className="store-web-link"
+            href={appStoreUrl + '?l=' + appStoreLanguages[language]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t.viewInBrowser}
+            <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </div>
+      </dialog>
     </main>
   );
 }
