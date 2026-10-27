@@ -113,7 +113,7 @@ export default function Home() {
     document.title = 'PackGo — ' + t.heroLine + ' ' + t.heroAccent;
     document
       .querySelector('meta[name="description"]')
-      ?.setAttribute('content', t.description);
+      ?.setAttribute('content', `${t.description} ${t.releaseAnnouncement}. ${t.languageNote}`);
   }, [language, t]);
   const steps = [
     {
@@ -180,6 +180,10 @@ export default function Home() {
         aria-labelledby="hero-title"
       >
         <div className="hero-copy">
+          <p className="release-announcement">
+            <Globe2 size={15} aria-hidden="true" />
+            <span><bdi>1.1.0</bdi> · {t.releaseAnnouncement}</span>
+          </p>
           <h1 id="hero-title">
             <span>{t.heroLine}</span>
             <span className="hero-accent">{t.heroAccent}</span>
@@ -194,6 +198,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
+          <p className="language-note">{t.languageNote}</p>
         </div>
         <div className="hero-visual" aria-label={t.preview}>
           <div className="phone phone-back phone-left">

@@ -181,6 +181,31 @@ select:focus-visible {
   min-width: 0;
   padding-bottom: 18px;
 }
+.release-announcement {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 8px 12px;
+  border: 1px solid #cbdcfa;
+  border-radius: 99px;
+  background: #eaf1ff;
+  color: #084eae;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.release-announcement svg {
+  flex-shrink: 0;
+}
+.language-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
 h1 {
   margin: 0;
   font-size: clamp(48px, 7.2vw, 94px);

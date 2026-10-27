@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: siteUrl },
   title: 'PackGo — Pack with ease. Travel ready.',
   description:
-    'Reusable packing lists, clear progress, and calmer departures. PackGo is free for iPhone and keeps your travel data on your device.',
+    'PackGo 1.1.0 is now available in 12 languages. Reusable packing lists, photo icons, and clear progress for iPhone. Works offline, with no account or ads.',
   applicationName: 'PackGo',
   other: { 'apple-itunes-app': 'app-id=6809829261' },
   icons: {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: 'PackGo — Pack with ease. Travel ready.',
-    description: 'Reusable packing lists for calmer departures.',
+    description: 'Now available in 12 languages. Reusable packing lists and photo icons for iPhone. Works offline, with no account or ads.',
     images: [
       {
         url: socialImageUrl,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'PackGo — Pack with ease. Travel ready.',
-    description: 'Reusable packing lists for calmer departures.',
+    description: 'Now available in 12 languages. Reusable packing lists and photo icons for iPhone. Works offline, with no account or ads.',
     images: [socialImageUrl],
   },
 };
